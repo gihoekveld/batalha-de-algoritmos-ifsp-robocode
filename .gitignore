@@ -1,0 +1,35 @@
+# Arquivos do Sistema Operacional
+.DS_Store
+.DS_Store?
+._*
+Thumbs.db
+ehthumbs.db
+
+# IDEs e Editores
+.idea/
+.vscode/
+*.iml
+.classpath
+.project
+.settings/
+
+# Robocode - Banco de dados de cache e temporários da máquina local
+# (O Robocode recria esse arquivo automaticamente ao iniciar)
+robots/robot.database
+robots/.robotcache/
+*.log
+
+# Robocode - Configurações geradas em tempo de execução
+# (Evita subir caminhos absolutos da máquina de desenvolvimento e posições de janela)
+config/compiler.properties
+config/window.properties
+config/robocode.properties
+
+# Configurações com credenciais e tokens locais da partida
+torneio.properties
+.env
+
+# Arquivos temporários e backups
+*.tmp
+*.bak
+

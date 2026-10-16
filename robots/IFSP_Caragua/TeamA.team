@@ -1,0 +1,7 @@
+#Robocode robot team
+#Tue Sep 29 13:54:00 BRT 2026
+team.description=Teste
+robocode.version=1.11.1
+team.author.name=Giselle
+team.version=TeamA1
+team.members=IFSP_Caragua.MyRobot*,sample.Corners
