@@ -8,9 +8,9 @@
 # URL base da API do backend (ex: http://localhost:8080 ou servidor em nuvem)
 api.url=http://localhost:8080
 # Email do administrador ou operador
-api.email=admin@admin.com
+api.email=email_aqui@dominio.com
 # Senha de acesso
-api.senha=admin123
+api.senha=senha_aqui
 # Token JWT (opcional, gerado e atualizado automaticamente ao conectar)
 api.token=
 
