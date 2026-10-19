@@ -1,29 +1,43 @@
 # ===============================================================
-# Configurações do Torneio Robocode / Chaveamento
+# Configurações do Robocode Torneio Launcher (Exemplo)
 # ===============================================================
 # Copie este arquivo para 'torneio.properties' para personalizar suas configurações locais.
-# Altere estas propriedades quando o projeto for para produção
-# (API hospedada em nuvem, credenciais de produção, etc.)
-# Você também pode sobrescrever qualquer valor via linha de comando ou variáveis de ambiente.
+# Este arquivo serve de modelo para conexão com o Painel de Chaveamento.
 
-# URL da API do backend (ex: http://localhost:8080 ou https://api.seudominio.com)
+# === Conexão & Autenticação na API ===
+# URL base da API do backend (ex: http://localhost:8080 ou servidor em nuvem)
 api.url=http://localhost:8080
+# Email do administrador ou operador
+api.email=admin@admin.com
+# Senha de acesso
+api.senha=admin123
+# Token JWT (opcional, gerado e atualizado automaticamente ao conectar)
+api.token=
 
-# Credenciais de autenticação na API
-auth.email=admin@admin.com
-auth.senha=admin123
-# Se preferir usar um token JWT direto em vez de email/senha:
-auth.token=
+# === Torneio Ativo ===
+# ID do torneio em andamento no painel de chaveamento
+torneio.id=1
 
-# Regras das partidas
-partida.rounds=3
-partida.vitorias=2
+# === Regras e Formato da Partida ===
+# Número máximo de rounds por confronto
+partida.maxRounds=3
+# Vitórias necessárias para um time vencer o confronto (MD3 -> 2 vitórias)
+partida.vitoriasParaGanhar=2
+# Finaliza a disputa imediatamente se um time abrir 2 vitórias consecutivas (ex: 2x0)
 partida.duasSeguidas=true
-partida.resetar=false
-
-# Controle de tempo e velocidade
+# Disputa round a round (permite intervalo para ajuste e compilação de robôs entre rounds)
+partida.disputaRoundARound=true
+# Tempo limite de cada round em segundos (padrão: 120s = 2 minutos)
 partida.duracaoSegundos=120
-partida.tps=30
+# Se true, ignora o tempo limite e roda o round até a destruição dos robôs
+partida.semLimiteTempo=false
 
-# Interface gráfica do Robocode (true = abre a arena, false = headless)
+# === Configurações da Arena Robocode ===
+# Largura do campo de batalha em pixels (padrão: 1000)
+robocode.campoLargura=1000
+# Altura do campo de batalha em pixels (padrão: 800)
+robocode.campoAltura=800
+# Velocidade da simulação em TPS (Turns Per Second). 30 para visualização fluida
+robocode.tps=30
+# Exibir a arena gráfica do Robocode (true = com janela, false = headless)
 robocode.exibirJanela=true
