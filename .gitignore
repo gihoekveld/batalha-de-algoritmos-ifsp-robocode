@@ -1,35 +1,63 @@
-# Arquivos do Sistema Operacional
+# === Sistema Operacional (macOS / Windows / Linux) ===
 .DS_Store
 .DS_Store?
 ._*
-Thumbs.db
+.Spotlight-V100
+.Trashes
 ehthumbs.db
+Thumbs.db
+Desktop.ini
 
-# IDEs e Editores
+# === IDEs e Editores ===
 .idea/
-.vscode/
 *.iml
+.vscode/
 .classpath
 .project
 .settings/
+nbproject/
+*.sublime-workspace
+*.sublime-project
 
-# Robocode - Banco de dados de cache e temporários da máquina local
-# (O Robocode recria esse arquivo automaticamente ao iniciar)
+# === Java / Compilação ===
+*.class
+torneio/**/*.class
+
+# === Robocode - Arquivos em Tempo de Execução e Cache ===
+config/
+robocode.properties*
+.robotcache/
+robotcache/
 robots/robot.database
 robots/.robotcache/
+robots/.data/
+**/.data/
+
+# === Robocode - Batalhas, Gravações e Logs ===
 *.log
+*.br
+*.br.gz
+hs_err_pid*.log
+replay_pid*.log
 
-# Robocode - Configurações geradas em tempo de execução
-# (Evita subir caminhos absolutos da máquina de desenvolvimento e posições de janela)
-config/compiler.properties
-config/window.properties
-config/robocode.properties
+# === RoboRumble ===
+roborumble/temp/
+roborumble/results/
 
-# Configurações com credenciais e tokens locais da partida
+# === Credenciais e Configurações Locais ===
 torneio.properties
 .env
 
-# Arquivos temporários e backups
+# === Backups e Scripts Temporários Locais ===
+backup_versoes/
+scratch/
 *.tmp
 *.bak
 
+# === Times e Robôs do Torneio ===
+# Mantém as pastas estruturais via .gitkeep, mas ignora robôs e times locais dos competidores
+robots/torneio_teams/*
+!robots/torneio_teams/.gitkeep
+!robots/torneio_teams/robos/
+robots/torneio_teams/robos/*
+!robots/torneio_teams/robos/.gitkeep

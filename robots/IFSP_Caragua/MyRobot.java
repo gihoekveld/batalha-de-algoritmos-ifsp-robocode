@@ -34,30 +34,22 @@ public class MyRobot extends Robot
 	 * onScannedRobot: What to do when you see another robot
 	 */
 	public void onScannedRobot(ScannedRobotEvent e) {
-		// Replace the next line with any behavior you would like
-  		turnGunTo(scannedAngle);
-		
+		turnGunRight(getHeading() - getGunHeading() + e.getBearing());
 		fire(1);
-	}
-	
-    public void onBulletHit(HitByBulletEvent e) {
-		// Replace the next line with any behavior you would like
-		back(10);
 	}
 
 	/**
 	 * onHitByBullet: What to do when you're hit by a bullet
 	 */
 	public void onHitByBullet(HitByBulletEvent e) {
-		// Replace the next line with any behavior you would like
-		turnAheadLeft(100, 90 - hitByBulletBearing);
+		turnLeft(90 - e.getBearing());
+		ahead(100);
 	}
 	
 	/**
 	 * onHitWall: What to do when you hit a wall
 	 */
 	public void onHitWall(HitWallEvent e) {
-		// Replace the next line with any behavior you would like
 		back(20);
 	}	
 }
