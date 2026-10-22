@@ -1836,7 +1836,7 @@ public class TorneioLauncherFrame extends JFrame {
         rbOponenteSample.setFont(new Font("Segoe UI", Font.BOLD, 12));
         rbOponenteSample.setOpaque(false);
 
-        rbOponenteTurma = new JRadioButton("Robôs da Turma", false);
+        rbOponenteTurma = new JRadioButton("Robôs do Torneio (inclui Sample Team)", false);
         rbOponenteTurma.setFont(new Font("Segoe UI", Font.BOLD, 12));
         rbOponenteTurma.setOpaque(false);
 
@@ -2148,7 +2148,7 @@ public class TorneioLauncherFrame extends JFrame {
                 List<String> robos = robotManager.listarApenasRobos();
                 for (String r : robos) {
                     boolean marcado = (prevSelected != null && prevSelected.equalsIgnoreCase(r));
-                    modelCombatenteTeste.addRow(new Object[] { marcado, r, "robos/" + r + ".class" });
+                    modelCombatenteTeste.addRow(new Object[] { marcado, r, detalhesRoboTeste(r) });
                 }
             } else {
                 List<String> times = robotManager.listarApenasTimes();
@@ -2192,8 +2192,8 @@ public class TorneioLauncherFrame extends JFrame {
                 List<String> robos = robotManager.listarApenasRobos();
                 for (String r : robos) {
                     boolean marcado = prevSelected.contains(r);
-                    modelOponentesTeste.addRow(new Object[] { marcado, r, "Robô da Turma",
-                            "Robô compilado em 'robots/torneio_teams/robos'" });
+                    modelOponentesTeste.addRow(new Object[] { marcado, r, "Robô do Torneio",
+                            detalhesRoboTeste(r) });
                 }
             } else {
                 List<String> times = robotManager.listarApenasTimes();
@@ -2207,6 +2207,13 @@ public class TorneioLauncherFrame extends JFrame {
         }
 
         atualizarStatusSelecaoOponentesTeste();
+    }
+
+    private String detalhesRoboTeste(String className) {
+        if (className != null && className.startsWith("torneio_sample_team.")) {
+            return "Sample Team — robots/torneio_sample_team";
+        }
+        return "Robô da turma — robots/torneio_teams/robos";
     }
 
     private String obterCombatenteTesteMarcado() {

@@ -2,7 +2,7 @@ package torneio_sample_team;
 
 import java.io.IOException;
 
-import robocode.ScannedRobotEvent;
+import robocode.*;
 import robocode.TeamRobot;
 
 /**

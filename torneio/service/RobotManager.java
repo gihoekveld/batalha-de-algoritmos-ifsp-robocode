@@ -13,15 +13,18 @@ public class RobotManager {
     private final File robotsDir;
     private final File teamsDir;
     private final File robosDir;
+    private final File sampleTeamDir;
 
     public RobotManager() {
         this.robotsDir = new File("robots");
         this.teamsDir = new File(robotsDir, "torneio_teams");
         this.robosDir = new File(teamsDir, "robos");
+        this.sampleTeamDir = new File(robotsDir, "torneio_sample_team");
 
         if (!teamsDir.exists()) {
             teamsDir.mkdirs();
         }
+
         if (!robosDir.exists()) {
             robosDir.mkdirs();
         }
@@ -33,6 +36,10 @@ public class RobotManager {
 
     public File getRobosDir() {
         return robosDir;
+    }
+
+    public File getSampleTeamDir() {
+        return sampleTeamDir;
     }
 
     public List<String> descobrirRobos() {
@@ -71,6 +78,25 @@ public class RobotManager {
                 });
             } catch (Exception e) {
                 System.err.println("Erro ao listar robos da pasta torneio_teams/robos: " + e.getMessage());
+            }
+        }
+
+        // 3. Descobre robôs de exemplo para treino em robots/torneio_sample_team
+        if (sampleTeamDir.exists() && sampleTeamDir.isDirectory()) {
+            try (Stream<Path> stream = Files.walk(sampleTeamDir.toPath())) {
+                stream.filter(Files::isRegularFile).forEach(path -> {
+                    String fileName = path.getFileName().toString();
+                    if (fileName.startsWith(".")) return;
+                    if ((fileName.endsWith(".class") || fileName.endsWith(".java"))
+                            && !fileName.contains("$")) {
+                        Path relative = basePath.relativize(path);
+                        String relStr = relative.toString().replace(File.separatorChar, '.');
+                        int extensionLength = fileName.endsWith(".class") ? 6 : 5;
+                        resultado.add(relStr.substring(0, relStr.length() - extensionLength));
+                    }
+                });
+            } catch (Exception e) {
+                System.err.println("Erro ao listar robôs de torneio_sample_team: " + e.getMessage());
             }
         }
 
@@ -329,9 +355,10 @@ public class RobotManager {
         fazerBackupVersao(contextoBackup);
 
         List<String> javaFiles = new ArrayList<>();
-        try (Stream<Path> stream = Files.list(robosDir.toPath())) {
+        try (Stream<Path> stream = Files.walk(robotsDir.toPath())) {
             stream.filter(Files::isRegularFile)
                   .filter(p -> p.getFileName().toString().endsWith(".java") && !p.getFileName().toString().startsWith("."))
+                  .filter(p -> p.startsWith(robosDir.toPath()) || p.startsWith(sampleTeamDir.toPath()))
                   .forEach(p -> javaFiles.add(p.toAbsolutePath().toString()));
         } catch (Exception e) {
             res.sucesso = false;
@@ -341,7 +368,7 @@ public class RobotManager {
 
         if (javaFiles.isEmpty()) {
             res.sucesso = true;
-            res.mensagem = "Nenhum arquivo .java encontrado na pasta 'robots/torneio_teams/robos' para compilar.";
+            res.mensagem = "Nenhum arquivo .java encontrado nas pastas de robôs do torneio para compilar.";
             return res;
         }
 
@@ -364,7 +391,8 @@ public class RobotManager {
 
             if (exitCode == 0) {
                 res.sucesso = true;
-                res.mensagem = "Sucesso! " + javaFiles.size() + " robô(s) compilado(s) com sucesso em 'robots/torneio_teams/robos'.";
+                res.mensagem = "Sucesso! " + javaFiles.size()
+                        + " robô(s) compilado(s) em 'robots/torneio_teams/robos' e 'robots/torneio_sample_team'.";
                 res.detalhes = output;
             } else {
                 res.sucesso = false;

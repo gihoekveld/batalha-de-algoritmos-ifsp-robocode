@@ -1,6 +1,6 @@
 package torneio_sample_team;
 
-import robocode.ScannedRobotEvent;
+import robocode.*;
 import robocode.TeamRobot;
 
 /**
